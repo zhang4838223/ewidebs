@@ -1,0 +1,52 @@
+@charset "utf-8";
+/* CSS Document */
+@font-face
+{
+font-family: "microsoft yahei";
+/*src: url('font/Hiragino Sans GB W3.otf');*/
+}
+
+*{ margin:0; padding:0;}
+ul, ol{ margin:0; padding:0; list-style:none;}
+a{ text-decoration:none;}
+a:hover{ cursor:pointer;}
+input, select{border:none;}
+img{ border:none;}
+table{ border-spacing:0px;}
+html{width:100%; height: 100%; overflow-x:hidden; overflow-y:hidden;}
+body{ width:100%; height: 100%; overflow-x:hidden; font-family:"microsoft yahei"; background:#fff; color:#5b5b5b;}
+
+.clear{ height:0; clear:both;}
+
+/*文本框默认颜色*/
+::-webkit-input-placeholder { color:#ccc;}
+input::-moz-placeholder { color:#ccc;}
+textarea::-moz-placeholder{ color:#ccc;}
+
+
+
+.login{ width: 100%; height: 100%;}
+.login_logo{ padding: 10px 0 0 20px;}
+
+.login_conter{ margin: 5% auto 0; width: 595px;padding-bottom:20px;  background: url(../img/login_conter_bg.png) no-repeat left center/100% 100%;}
+.login_conter_text{ height: 60px; padding-top:16px; background: url(../img/login_conter_text_bottom.png) no-repeat left bottom; margin:0 16px;}
+.login_conter_text img{ display: block; margin: 0 auto;}
+
+.login_reset{ width: 356px; margin: 0 auto; font-size: 14px; padding-top:12px;}
+.login_reset .login_label{ display: block; padding-bottom:15px;}
+.login_reset .login_label span{color: #fff;  display: inline-block; width: 90px;line-height: 32px;}
+.login_reset .login_label input{ height: 34px; width: 240px; padding: 0 10px;}
+.login_save{}
+.login_save input[type=checkbox]{ width: 20px; height: 20px; float: left; border-radius: 5px;}
+.login_save span{ margin-left: 12px; color: #fff;  display: inline-block; line-height: 18px; float:left;}
+.login_save i{color: #dd0000; font-style: normal; margin-left:24px;}
+.login_btn{ margin-top:20px; height: 45px; width: 100%; display: block; background: #f5a22b; cursor:hand; color: #fff; font-size: 18px; text-align: center; border-radius: 5px; line-height: 42px;}
+
+.validateCode{}
+.input-label{ width:90px; color:#fff; font-size:14px; display:inline-block; line-height: 24px; margin-bottom: 20px;}
+.required{ height:24px;}
+.login_reset .validateCode{ vertical-align: middle;}
+.validateCodeRefresh{ color:rgb(123,222,84);}
+.footer{ color:#fff; font-size:14px; width:560px; margin:10px auto 0;}
+.footer a{ color:#043c63;}
+

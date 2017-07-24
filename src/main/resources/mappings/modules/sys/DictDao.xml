@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ewide.platform.modules.sys.dao.DictDao">
+
+	<sql id="dictsColumns">
+		a.id AS "id",
+		a.value AS "value",
+		a.label AS "label",
+		a.dict_type AS "dictType",
+		a.sort AS "sort",
+		a.parent_id AS "parentId",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.orid AS "orId" ,
+		d.label AS "orLabel"
+	</sql>
+
+	<sql id="dictsJoins">
+	LEFT JOIN sys_dict d ON d.id = a.orid
+	</sql>
+
+	<select id="get" resultType="Dict">
+		SELECT
+		<include refid="dictsColumns" />
+		FROM sys_dict a
+		<include refid="dictsJoins" />
+		WHERE a.id = #{id}
+	</select>
+
+	<select id="findValueOrLabel" resultType="Integer">
+		SELECT
+			count(1)
+		FROM sys_dict a
+		WHERE a.del_flag = '0' 
+		<if test="dictType!=null and dictType!=''">and a.dict_type=#{dictType}</if>
+		<if test="parentId!=null and parentId!='' ">and a.parent_id=#{parentId} </if>
+		<if test="value != null">and a.value = #{value}</if>
+		<if test="label != null">and a.label = #{label}</if>
+	</select>
+
+
+	<!--判断是否有子节点  -->
+	<select id="queryNode" resultType="Integer">
+		SELECT
+			count(1)
+		FROM sys_dict a
+		WHERE a.del_flag = '0' AND a.parent_id =#{id} 
+	</select>
+		
+	<select id="findList" resultType="Dict">
+		SELECT
+		<include refid="dictsColumns" />
+		FROM sys_dict a
+		<include refid="dictsJoins" />
+		where a.del_flag = #{DEL_FLAG_NORMAL}
+		<if test="dictType !=null and dictType!=''">
+			and a.dict_type=#{dictType}
+		</if>
+		<if test="label!=null and label!=''">
+			and (a.label like '%'||#{label}||'%' or a.id='1')
+		</if>
+		<if test="parentId!=null and parentId!=''">
+			and a.id in(select id from sys_dict d where
+			d.parent_id=#{parentId})
+		</if>
+		ORDER BY a.sort asc,a.update_date asc
+	</select>
+	
+	<select id="findTypeList" resultType="Dict">
+		SELECT
+		<include refid="dictsColumns" />
+		FROM sys_dict a
+		<include refid="dictsJoins" />
+		where a.del_flag = #{DEL_FLAG_NORMAL}
+		<if test="value !=null and value!=''">
+			and a.parent_id in(select id from SYS_DICT where value=#{value})
+		</if>
+		ORDER BY a.sort asc,a.update_date asc
+	</select>
+
+	<select id="findCascadeDictList" resultType="Dict">
+		SELECT
+		<include refid="dictsColumns" />
+		FROM sys_dict a
+		<include refid="dictsJoins" />
+		where a.del_flag = '0'
+		<if test="secondValue !=null and secondValue!=''">
+			and a.parent_id in(select id from SYS_DICT where value=#{secondValue} and del_flag = '0')
+		</if>
+		<if test="(firstValue !=null and firstValue != '') or (firstLabel != null and firstLabel != '')">
+			and a.orid in (select id from SYS_DICT  where value =#{firstValue} and label=#{firstLabel} and del_flag = '0')
+		</if>
+		ORDER BY a.sort asc,a.update_date asc
+	</select>
+	
+	<select id="findAllList" resultType="Dict">
+		SELECT
+		<include refid="dictsColumns" />
+		FROM sys_dict a
+		<include refid="dictsJoins" />
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+
+	<insert id="insert">
+		INSERT INTO sys_dict(
+		id,
+		value,
+		label,
+		dict_type,
+		sort,
+		parent_id,
+		create_by,
+		create_date,
+		update_by,
+		update_date,
+		remarks,
+		orId,
+		del_flag
+		) VALUES (
+		#{id},
+		#{value},
+		#{label},
+		#{dictType},
+		#{sort},
+		#{parentId},
+		#{createBy.id},
+		#{createDate},
+		#{updateBy.id},
+		#{updateDate},
+		#{remarks},
+		#{orId},
+		#{delFlag}
+		)
+	</insert>
+
+	<update id="update">
+		UPDATE sys_dict SET
+		value = #{value},
+		label =
+		#{label},
+		dict_type = #{dictType},
+		sort = #{sort},
+		parent_id =
+		#{parentId},
+		update_by = #{updateBy.id},
+		update_date = #{updateDate},
+		orid = #{orId},
+		remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+
+	<update id="delete">
+		UPDATE sys_dict SET
+		del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	<update id="deleteType">
+		UPDATE sys_dict SET
+		del_flag ='1'
+		WHERE id = #{id} or
+		parent_Id=#{id}
+	</update>
+	
+	<select id="scopeList" resultType="Dict">
+		SELECT a.id          AS "id",
+               a.value       AS "value",
+               a.label       AS "label",
+               a.dict_type   AS "dictType",
+               a.sort        AS "sort",
+               a.parent_id   AS "parentId",
+               a.create_by   AS "createBy.id",
+               a.create_date AS "createDate",
+               a.update_by   AS "updateBy.id",
+               a.update_date AS "updateDate",
+               a.remarks     AS "remarks",
+               a.del_flag    AS "delFlag",
+               a.orid        AS "orId",
+               d.label       AS "orLabel"
+          FROM sys_dict a
+          LEFT JOIN sys_dict d
+            ON d.id = a.orid
+         where a.del_flag = '0'
+           and a.dict_type = 'VALUE'
+           and a.id in (select id from sys_dict d where d.parent_id = '11')
+           and a.value &gt;= #{scope}
+           <if test="scope==8">
+           and a.value != '9'
+           </if>
+           <if test="scope==9">
+           and a.value = '9'
+           </if>
+         ORDER BY a.sort asc, a.update_date asc
+	</select>
+
+</mapper>

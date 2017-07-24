@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ewide.platform.modules.sys.dao.UserGroupDao">
+     <resultMap id="userGroupResult" type="UserGroup">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="code" column="code" />
+		<result property="remarks" column="remarks" />
+		<result property="sort" column="sort" />
+		<collection property="company" ofType="Office">
+			<id property="id" column="company.id" />
+			<result property="name" column="company.name" />
+		</collection>
+		<collection property="userList" ofType="User">
+			<id property="id" column="userList.id" />
+			<result property="name" column="userList.name" />
+		</collection>
+		<collection property="roleList" ofType="Role">
+			<id property="id" column="roleList.id" />
+			<result property="name" column="roleList.name" />
+		</collection>
+	</resultMap>
+	
+	<sql id="userGroupColumns">
+		a.id,
+		a.name,
+		a.office_id AS "company.id",
+		p.name AS "company.name",
+		a.code,
+		a.sort,
+		a.remarks,
+		a.create_by AS "createBy.id",
+		a.create_date,
+		a.update_by AS "updateBy.id",
+		a.update_date,
+		a.del_flag
+	</sql>
+	
+	<sql id="userGroupJoins">
+		LEFT JOIN sys_office p ON p.id = a.office_id
+    </sql>
+    
+	  <select id="get" resultMap="userGroupResult">
+		SELECT
+			<include refid="userGroupColumns"/>,
+			u.user_id AS "userList.id",
+			r.role_id AS "roleList.id",
+			u1.name AS "userList.name",
+			r1.name AS "roleList.name"
+		FROM sys_userGroup a
+		<include refid="userGroupJoins"/>
+		LEFT JOIN sys_userGroup_role r ON r.userGroup_id = a.id
+		LEFT JOIN sys_usergroup_user u ON u.userGroup_id = a.id
+		LEFT JOIN sys_role r1 ON r1.id = r.role_id
+		LEFT JOIN sys_user u1 ON u1.id = u.user_id
+		WHERE a.id = #{id} 
+	</select>  
+	
+	<select id="findUserGroupList" resultMap="userGroupResult">
+		SELECT
+			<include refid="userGroupColumns"/>
+		FROM sys_userGroup a
+		<include refid="userGroupJoins"/>
+		LEFT JOIN sys_usergroup_user uu ON uu.userGroup_id = a.id
+		WHERE a.del_flag='0' and a.id in 
+		(select a.userGroup_id from sys_usergroup_user a where a.user_id=#{id})
+	</select>  
+	
+	
+	<select id="findAllList" resultType="UserGroup">
+		SELECT
+			<include refid="userGroupColumns"/>
+		FROM sys_usergroup a
+		<include refid="userGroupJoins"/>
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+		ORDER BY a.sort
+	</select>
+	
+	<select id="findNameOrCode" resultType="Integer">
+		SELECT
+			count(1)
+		FROM sys_usergroup a
+		WHERE a.del_flag = '0'
+		<if test="name != null"> and a.name = #{name}</if>
+		<if test="code != null"> and a.code = #{code}</if>
+	</select>
+	
+	<select id="findList" resultType="UserGroup">
+		SELECT
+			<include refid="userGroupColumns"/>
+		FROM sys_usergroup a
+		<include refid="userGroupJoins"/>
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+		<if test="name != null and name != ''">and a.name like '%'||#{name}||'%'</if>
+		<if test="code != null and code != ''">and a.code like #{code}||'%'</if>
+		<if test="company != null and company.id != null and company.id != ''">and a.office_id = #{company.id}</if>
+		ORDER BY a.sort
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO sys_usergroup(
+			id, 
+			name, 
+			office_id,
+			code,
+			sort,
+			create_by, 
+			create_date, 
+			update_by, 
+			update_date, 
+			remarks, 
+			del_flag
+		) VALUES (
+			#{id}, 
+			#{name}, 
+			#{company.id},
+			#{code},
+			#{sort},
+			#{createBy.id}, 
+			#{createDate}, 
+			#{updateBy.id}, 
+			#{updateDate}, 
+			#{remarks}, 
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sys_userGroup SET 
+			name = #{name}, 
+			office_id = #{company.id},
+			code=#{code},
+			sort=#{sort},
+			update_by = #{updateBy.id}, 
+			update_date = #{updateDate}, 
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<insert id="insertUserGroupUser">
+		INSERT INTO sys_usergroup_user(USERGROUP_ID, USER_ID)
+		<foreach collection="userList" item="user" separator=" union all ">
+			SELECT #{id}, #{user.id}
+			<if test="dbName != 'mssql'">
+			FROM dual
+			</if>
+		</foreach>
+	</insert>
+	<delete id="deleteUserGroupUser">
+		DELETE FROM sys_usergroup_user WHERE userGroup_id = #{id}
+	</delete>
+	
+	<insert id="insertUserGroupRole">
+		INSERT INTO sys_userGroup_role(USERGROUP_ID, ROLE_ID)
+		<foreach collection="roleList" item="role" separator=" union all ">
+			SELECT #{id}, #{role.id}
+			<if test="dbName != 'mssql'">
+			FROM dual
+			</if>
+		</foreach>
+	</insert>
+	<delete id="deleteUserGroupRole">
+		DELETE FROM sys_userGroup_role WHERE userGroup_id = #{id}
+	</delete>
+	
+	<!-- 逻辑删除用户 -->
+	<update id="delete">
+		UPDATE sys_usergroup SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

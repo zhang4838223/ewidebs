@@ -1,0 +1,7 @@
+/*控制tab页签内部布局*/
+.widget-box > .widget-body{
+	height:calc(100% - 42px);
+	overflow-y:auto;
+	overflow-x:hidden;
+	padding-bottom:10px;
+}

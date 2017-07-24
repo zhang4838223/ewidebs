@@ -1,0 +1,381 @@
+body .form-control, .input-group-addon, .form-control[readonly] {
+    background-color: #fff;
+    border-radius: 0;
+    /*padding-right: 42.5px;*/
+}
+input.form-control{
+	border:1px solid #ccc;
+}
+
+/*搜索栏*/
+.navbar-form .form-group {
+    margin-bottom: 8px;
+    margin-right: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.navbar-form .form-group .form-control {
+    width: auto;
+    display: inline-block;
+}
+
+.navbar-form .radio {
+    display: inline;
+}
+
+.navbar-form .checkbox input[type=checkbox], .navbar-form .radio input[type=radio] {
+    position: absolute;
+    margin-left: -15px;
+}
+
+.navbar-form .checkbox > label, .navbar-form .radio > label {
+    margin-right: 18px;
+    padding-left: 0;
+    max-width: none;
+}
+
+/*搜索框*/
+.search-wrap {
+    padding: 0;
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+/*data-show-columns*/
+.fixed-table-toolbar .btn-group > .btn-group:last-child > .btn {
+    border-radius: 0;
+    height: 30px;
+    font-size: 12px;
+
+}
+
+/*page-list*/
+.page-list .btn-group button {
+    height: 30px;
+    font-size: 12px;
+}
+
+.search-wrap .form-group {
+    display: inline-block;
+}
+
+/*新增弹出层表单*/
+.open-modal {
+    overflow: hidden;
+}
+
+.open-modal .modalTable {
+    overflow-x: auto;
+    overflow-y: hidden;
+
+!important;
+}
+
+.modalTable .input-group {
+    width: 100%;
+    position: relative;
+}
+
+.modalTable .input-group > label {
+    color: #555;
+
+}
+
+.modalTable .form-group {
+    margin-bottom: 0;
+    margin-top: 15px;
+}
+
+.has-feedback label ~ .form-control-feedback {
+    top: 0;
+}
+
+.modalTable .form-group > .input-group > label.input-group-addon  {
+    background-color: #fff;
+    border: none;
+    width: 80px;
+    padding: 5px;
+    text-align: right;
+    font-weight: inherit;
+}
+.modalTable .form-group > .input-group > label.input-group-addon:after,.one-col-modal .modal-dialog .modal-body .form-group label:after{
+    content: ":";
+}
+.modalTable  .input-group > span.required {
+    position: absolute;
+    top: 5px;
+    right: -10px;
+    color: #cc0000;
+    font-weight: bold
+}
+.modalTable .has-success   > .input-group > span.required,.modalTable .has-error   > .input-group > span.required {
+   display: none;
+}
+.modalTable .form-group > .input-group > span.input-group-addon > i {
+    font-size: 8px;
+
+}
+
+.btn {
+    border-radius: 0;
+}
+
+.modalTable .form-group .form-control.bootstrap-select {
+    padding: 0 !important;
+}
+
+.input-sm {
+    padding: 5px 10px;
+}
+
+.form-group .form-control-feedback {
+    right: -25px;
+}
+
+/*校验控件定位*/
+.has-error .help-block {
+    position: absolute;
+    display: inline-block;
+    border-radius: 0;
+    border: none;
+    max-width: 276px;
+    font-size: 12px;
+    background-color: rgb(241, 120, 5);
+    color: #000;
+    text-align: center;
+    padding: 5px;
+    margin: 0;
+    z-index: 9999;
+    filter: alpha(opacity=90); /* IE */
+    -moz-opacity: .9; /* 老版Mozilla */
+    -khtml-opacity: .9; /* 老版Safari */
+    opacity: .9; /* 支持opacity的浏览器*/
+}
+
+.has-error .tooltip-arrow {
+    display: block;
+    margin-left: -5px;
+    border-width: 5px 5px 0;
+    border-top-color: rgb(241, 120, 5);
+    z-index: 9999;
+    filter: alpha(opacity=90); /* IE */
+    -moz-opacity: .9; /* 老版Mozilla */
+    -khtml-opacity: .9; /* 老版Safari */
+    opacity: .9; /* 支持opacity的浏览器*/
+}
+
+.tooltip-arrow {
+    display: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+
+.input-group-addon {
+    padding: 5px;
+}
+
+/*模态框大小*/
+.modalTable .modal-dialog {
+    /*margin: 60px 0;*/
+    margin: 0;
+    height: 100%;
+    width: auto;
+}
+/*时间日历框*/
+.date>input{
+    padding: 0 5px;
+}
+/*下拉框*/
+.form-control.select-box{
+    padding: 0;
+    border: 0;
+}
+.form-control.select-box>a.select2-choice{
+    height: 30px;
+    border-radius: 0;
+}
+.select2-container .select2-choice .select2-arrow{
+    border-radius: 0;
+
+}
+/*.modalTable .form-group .form-control button {*/
+    /*width: 100%;*/
+    /*height: 30px;*/
+    /*padding: 5px 10px;*/
+    /*font-size: 12px;*/
+    /*line-height: 1.5;*/
+    /*border-radius: 0;*/
+/*}*/
+
+/*.input-group .bootstrap-select .dropdown-menu ul.dropdown-menu {*/
+    /*padding-top: 10px;*/
+    /*padding-bottom: 10px;*/
+/*}*/
+
+/*复选框间距*/
+.modal .checkbox > label,.modal .radio > label {
+    margin-right: 8px;
+    width: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+}
+
+.checkbox > label > input[type=checkbox], .radio > label > input[type=radio] {
+    margin-left: -15px;
+}
+
+/*提示框样式*/
+.prompt-box .modal-content {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+.prompt-box .modal-dialog{
+width:300px;margin:100px auto;
+}
+
+.prompt-box .modal-header, .prompt-box .modal-footer {
+    padding: 8px;
+    border: none;
+}
+
+.prompt-box i {
+    color: #ec971f;
+    font-size: 20px;
+}
+
+.prompt-box .modal-body > .warning-text {
+    font-weight: 400;
+    display: inline-block;
+    margin-left: 8px;
+
+}
+
+.prompt-box .close {
+    filter: alpha(opacity=70); /* IE */
+    opacity: .7;
+}
+
+.prompt-box .close > span {
+    color: #f00;
+}
+
+/*公用模态框*/
+/*模态框最大宽度*/
+.modalTable .modal-dialog {
+    min-width: 1000px;
+}
+
+/*模态框固定头部*/
+.modalTable .modal-header {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: #fff;
+    margin: 0 auto;
+    height: 60px;
+    z-index: 1060;
+}
+
+/*模态框固定底部*/
+.modalTable .modal-footer {
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: inline-block;
+    zoom: 1;
+    background-color: #fff;
+    width: 60%;
+    margin: 0 auto;
+    height: 60px;
+    z-index: 1060;
+}
+
+/*模态框内容*/
+.modalTable .modal-content {
+    margin: 0 auto;
+    height: 100%;
+    overflow-y: auto;
+    border: none;
+    max-width: 1000px;
+}
+
+.modalTable .modal-dialog .modal-content .modal-body {
+    background-color: #fff;
+    padding: 60px 0 80px;
+    width: 100%;
+}
+
+/*一列布局*/
+/*start*/
+.one-col-modal .modal-dialog .modal-body .form-group label{
+    padding-top: 7px;
+    padding-right: 0;
+    margin-bottom: 0;
+    text-align: right;
+}
+.one-col-modal .modal-dialog{
+    max-width: 600px;
+    margin:30px auto;
+}
+/*.one-col-modal .modal-dialog .modal-header, .one-col-modal .modal-dialog .modal-footer {*/
+    /*min-width: 370px;*/
+    /*width: 40%;*/
+    /*max-width: 600px;*/
+/*}*/
+
+/*.one-col-modal .modal-dialog .modal-content {*/
+    /*width: 40%;*/
+/*}*/
+
+/*.one-col-modal .modal-dialog .modal-content .modal-body {*/
+    /*min-width: 400px;*/
+    /*width: 100%;*/
+    /*max-width: 600px;*/
+
+/*}*/
+
+/*end*/
+/*两列布局*/
+/*start*/
+.two-col-modal .modal-dialog .modal-header, .two-col-modal .modal-dialog .modal-footer {
+    min-width: 570px;
+    width: 60%
+}
+
+.two-col-modal .modal-dialog .modal-content {
+    width: 60%;
+}
+
+.two-col-modal .modal-dialog .modal-content .modal-body {
+    min-width: 600px;
+    width: 100%;
+}
+
+/*end*/
+/*三列布局*/
+/*start*/
+.three-col-modal .modal-dialog .modal-header, .three-col-modal .modal-dialog .modal-footer, .three-col-modal .modal-dialog .modal-content {
+    width: 70%;
+}
+
+.three-col-modal .modal-content {
+    max-width: none;
+}
+
+.three-col-modal .modal-dialog .modal-content .modal-body .row {
+    padding: 0 15px;
+}
+
+/*end*/
+
+
+

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ewide.platform.modules.sys.dao.UserOfficeDao">
+    
+	<sql id="userOfficeColumns">
+		a.id,
+		a.company_id AS "company.id",
+    	a.office_id AS "office.id",
+		a.user_id AS "user.id",
+		a.primary_level_code as "primaryLevelCode",
+		c.id AS "company.id",
+		o.id AS "office.id"
+	</sql>
+	
+	<sql id="userOfficeJoins">
+		LEFT JOIN sys_office c ON c.id = a.company_id
+		LEFT JOIN sys_office o ON o.id = a.office_id
+		LEFT JOIN sys_user cu ON cu.id = a.user_id
+		
+    </sql>
+    
+	<select id="findList" resultType="UserOffice">
+		SELECT
+			<include refid="userOfficeColumns"/>
+		FROM sys_user_office a
+		<include refid="userOfficeJoins"/>
+	</select>
+	
+	<select id="findUserOffices" resultType="UserOffice">
+		SELECT
+		a.id,
+		a.company_id AS "company.id",
+    	a.office_id AS "office.id",
+		a.user_id AS "user.id",
+		a.primary_level_code as "primaryLevelCode",
+		o.name AS "office.name"
+		FROM sys_user_office a
+		LEFT JOIN sys_office o ON o.id = a.office_id
+		where a.user_id=#{id}
+	</select>
+	
+	
+	<select id="findUserOfficesByOfficeId" resultType="UserOffice">
+		SELECT
+			<include refid="userOfficeColumns"/>
+		FROM sys_user_office a
+		<include refid="userOfficeJoins"/>
+		where a.office_id=#{id}
+	</select>
+	
+	
+	<insert id="insert">
+		INSERT INTO sys_user_office(
+			id, 
+			company_id,
+			office_id,
+			user_id,
+			primary_level_code
+		) VALUES (
+			#{id}, 
+			#{company.id},
+			#{office.id}, 
+			#{user.id}, 
+			#{primaryLevelCode}
+		)
+	</insert>
+	
+		<update id="update">
+		UPDATE sys_user_office SET 
+			primary_level_code = #{primaryLevelCode}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		delete from sys_user_office WHERE user_id = #{user.id}
+	</update>
+	
+	<delete id="deleteByOfficeId">
+		delete from sys_user_office WHERE office_id = #{id}
+	</delete>
+	
+</mapper>

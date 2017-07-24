@@ -1,0 +1,118 @@
+* {
+            padding: 0;
+            margin: 0;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .box-wrap {
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .left-wrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200px;
+            background-color: #fff;
+            min-height: 100%;
+            height:100%;
+            overflow:auto;
+            transition: all .5s;
+
+        }
+        
+         .left-wrap1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 250px;
+            background-color: #fff;
+            min-height: 100%;
+            height:100%;
+            overflow:auto;
+            transition: all .5s;
+
+        }
+
+        .left-active .left-wrap {
+            width: 0;
+        }
+        
+        .left-active .left-wrap1 {
+            width: 0;
+        }
+
+        .left-active .middle {
+            left: 0;
+        }
+        
+        .left-active .middle1 {
+            left: 0;
+        }
+
+        .left-active .right-wrap {
+            margin-left: 6px;
+
+        }
+        
+        .left-active .right-wrap1 {
+            margin-left: 6px;
+
+        }
+
+        .right-wrap {
+            position: relative;
+            margin-left: 206px;
+            height: 100%;
+            transition: all .5s;
+
+            /*background-color: #b2b2b2;*/
+            /*width: 100px;*/
+        }
+        
+        .right-wrap1 {
+            position: relative;
+            margin-left: 256px;
+            height: 100%;
+            transition: all .5s;
+        }
+
+        .middle {
+            width: 6px;
+            min-height: 100%;
+            background: #efefef url('../images/openclose.png') no-repeat -29px center;
+            position: absolute;
+            top: 0;
+            left: 200px;
+            transition: all .5s;
+
+        }
+        
+        .middle1 {
+            width: 6px;
+            min-height: 100%;
+            background: #efefef url('../images/openclose.png') no-repeat -29px center;
+            position: absolute;
+            top: 0;
+            left: 250px;
+            transition: all .5s;
+
+        }
+        
+        .close {
+            background-position: 1px center;
+            opacity: 0.5;
+        }
+        
+        .right-content {
+            min-height: 100%;
+            background-color: #fff;
+
+        }
+.ztree {overflow:auto;margin:0;margin-top:25px;}

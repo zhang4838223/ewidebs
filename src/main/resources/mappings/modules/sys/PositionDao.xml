@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ewide.platform.modules.sys.dao.PositionDao">
+	<sql id="positionColumns">
+		a.id,
+		a.position_no AS "positionNo",
+		a.position_name AS "positionName",
+		a.office_id AS "office.id",
+		a.remarks,
+		a.create_by AS "createBy.id",
+		a.create_date,
+		a.update_by AS "updateBy.id",
+		a.update_date,
+		a.del_flag,
+		o.name AS "office.name"
+	</sql>
+	
+	<sql id="positionJoins">
+		LEFT JOIN sys_office o ON o.id = a.office_id
+    </sql>
+	
+	<!-- 根据编号获得职位 -->
+	<select id="get" resultType="Position">
+		SELECT
+			<include refid="positionColumns"/>
+		FROM sys_position a
+		<include refid="positionJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findAllList" resultType="Position">
+		SELECT
+			<include refid="positionColumns"/>
+		FROM sys_position a
+		<include refid="positionJoins"/>
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+	</select>
+	
+	<select id="findNameOrCode" resultType="Integer">
+		SELECT
+			count(1)
+		FROM sys_position a
+		<include refid="positionJoins"/>
+		WHERE a.del_flag = '0'
+		<if test="positionName != null">and a.position_name = #{positionName}</if>
+		<if test="positionNo != null">and a.position_No = #{positionNo}</if>
+		<if test="office != null and office.id !=null">and a.office_id = #{office.id}</if>
+	</select>
+	
+	<!-- 分页查询用户信息 -->
+	<select id="findList" resultType="Position">
+		SELECT
+			<include refid="positionColumns"/>
+		FROM sys_position a
+		<include refid="positionJoins"/>
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+		<if test="positionName != null and positionName != ''">
+			AND a.position_name like 
+					<if test="dbName == 'oracle'">'%'||#{positionName}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{positionName}+'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{positionName}, '%')</if>
+		</if>
+		<if test="positionNo != null and positionNo != ''">
+			AND a.position_no like 
+					<if test="dbName == 'oracle'">'%'||#{positionNo}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{positionNo}+'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{positionNo}, '%')</if>
+		</if>
+		AND a.DEL_FLAG = #{DEL_FLAG_NORMAL}
+		ORDER BY a.update_date asc
+	</select>
+	
+	<!-- 根据机构ID查询职位 -->
+	<select id="findPositionById" resultType="Position">
+		SELECT
+			a.id,
+			a.position_name AS "positionName"
+		FROM sys_position a
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+		AND a.office_id = #{office.id}
+		ORDER BY a.update_date asc
+	</select>
+	
+	<!-- 插入用户 -->
+	<insert id="insert">
+		INSERT INTO sys_position(
+			id,
+			office_id,
+			position_name,
+			position_no,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			DEL_FLAG
+		) VALUES (
+			#{id}, 
+			#{office.id},
+			#{positionName},
+			#{positionNo},
+			#{createBy.id}, 
+			#{createDate}, 
+			#{updateBy.id}, 
+			#{updateDate}, 
+			#{remarks},
+			#{DEL_FLAG_NORMAL}
+		)
+	</insert>
+	
+	<!-- 更新用户 -->
+	<update id="update">
+		UPDATE sys_position SET 
+			POSITION_NAME = #{positionName}, 
+			POSITION_NO = #{positionNo}, 
+			office_id = #{office.id},
+			update_by = #{updateBy.id}, 
+			update_date = #{updateDate}, 
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="delete">
+		UPDATE sys_position SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</delete>
+	
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ewide.platform.modules.sys.dao.AttachmentDao">
+
+	<sql id="attachmentColumns">
+		a.id AS "id",
+		a.name AS "name",
+		a.path AS "path",
+		a.type AS "type",
+		a.fsize AS "fSize",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<select id="get" resultType="Attachment">
+		SELECT
+		<include refid="attachmentColumns" />
+		FROM sys_attachment a
+		WHERE a.id = #{id}
+	</select>
+
+	<select id="findList" resultType="Attachment">
+		SELECT
+		<include refid="attachmentColumns" />
+		FROM sys_attachment a
+		where a.del_flag = #{DEL_FLAG_NORMAL}
+	</select>
+	
+	<select id="findListByIds" resultType="Attachment">
+		SELECT
+		<include refid="attachmentColumns" />
+		FROM sys_attachment a
+		where a.id in
+		 <foreach item="ids" index="index" collection="array" open="(" separator="," close=")">  
+		  #{ids}  
+		 </foreach>  
+	</select>
+
+	<insert id="insert">
+		INSERT INTO sys_attachment a(
+		a.id,
+		a.name,
+		a.path,
+		a.type,
+		a.fsize,
+		a.create_by,
+		a.create_date,
+		a.remarks,
+		a.del_flag
+		) VALUES (
+		#{id},
+		#{name},
+		#{path},
+		#{type},
+		#{fSize},
+		#{createBy.id},
+		#{createDate},
+		#{remarks},
+		#{delFlag}
+		)
+	</insert>
+
+	<update id="delete">
+		delete from sys_attachment WHERE id = #{id}
+	</update>
+</mapper>

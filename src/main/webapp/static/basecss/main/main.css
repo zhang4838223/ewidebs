@@ -1,0 +1,276 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{ margin:0; padding:0;}
+ul, ol{ margin:0; padding:0; list-style:none;}
+a{ text-decoration:none;}
+a:hover{ cursor:pointer;}
+input, select{border:none;}
+img{ border:none;}
+table{ border-spacing:0px;}
+html{ min-width: 1000px; height: 100%;}/*word-wrap:break-word;*/
+body{ width:100%; font-family:"Microsoft YaHei"，Simsun; background:#fff; height: 100%;position: relative;}
+::-webkit-input-placeholder { color:#ceced3;}
+.clear{ height:0; clear:both;}
+
+.font12{font-size: 12px;}
+.font14{ font-size: 14px;}
+.font16{ font-size: 16px;}
+
+input, select, texteara{ border-radius:5px;}
+
+/* ==== 按钮样式 ===== */
+
+/* 头部的 查询按钮 */
+.btn_select{ background:url(/ewidebs-test/static/images/main/btn_select.png) no-repeat left center; width:62px; height:26px; border:none; font-size:12px; line-height:24px; padding:0 0 0 20px;}
+/* 头部的 重置按钮 */
+.btn_reset{ background:url(/ewidebs-test/static/images/main/btn_reset.png) no-repeat left center; width:62px; height:26px; border:none; font-size:12px; line-height:24px; padding:0 0 0 20px;}
+/* 头部的新增按钮 */
+.btn_add{ width:62px; height:26px; font-size:12px; border:none; margin-left:5px;}
+.btn_add i{ margin-right: 3px;}
+/* 头部的修改按钮 */
+.btn_update{ width:62px; height:26px; font-size:12px; border:none;}
+.btn_update i{ margin-right: 3px;}
+/* 头部的删除按钮 */
+.btn_delete{ width:62px; height:26px; font-size:12px; border:none;}
+.btn_delete i{ margin-right: 3px;}
+
+
+
+
+
+/* ==== 不用加CLASS的===== */
+
+/* 头部的label文本框 */
+.top_label .input-sm{ padding:5px 0 0 10px;}
+.top_label input.input-sm{ line-height:24px;height:24px; width:140px; padding: 0 5px; font-size:12px; border-radius:3px;}
+.navbar-form .form-group .form-control{ font-size:12px;}
+/*表格样式*/
+table{ font-size:12px; }
+table tr td,table tr th{text-align:center;}
+
+/*弹出验证的样式*/
+.has-error .help-block{ padding:2px 5px; color:#b94a48;}
+/*弹出框头部的样式*/
+.modalTable .modal-header{ color:#b94a48; background:#58a1f3; height:36px; line-height:36px;    padding: 6px 15px;}
+/*弹出框高度自适应*/
+.modalTable .modal-content{ height:auto;}
+/*弹出框文本框的样式*/
+.input-group input.form-control{ border-radius:5px}
+.input-group .form-control:not(:first-child):not(:last-child), .input-group-addon:not(:first-child):not(:last-child), .input-group-btn:not(:first-child):not(:last-child){ border-radius:3px;}
+.input-group .form-control:last-child, .input-group-addon:last-child, .input-group-btn:first-child>.btn-group:not(:first-child)>.btn, .input-group-btn:first-child>.btn:not(:first-child), .input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group>.btn, .input-group-btn:last-child>.dropdown-toggle{ border-radius:3px;}
+/*字典机构左边图片改变*/
+/* 菜单--系统设置--系统设置--字典管理，字典管理树的图标，还原默认
+.ztree li span.button.ico_open, .ztree li span.button.ico_close{ background-position:0; background:url(/ewidebs-test/static/images/main/dict_tree.jpg) no-repeat left center/100% 100%;}
+*/
+/*确定取消按钮样式*/
+.col-xs-10 button{ width:70; height:30px; border:none; font-size:12px;}
+.col-xs-10 button[type="submit"]{ background:#58a1f3}
+/*字典结构查询框样式*/
+.accordion-group .col-xs-9{ width:63%; padding:0 5px 0 0;}
+
+/* 模态框样式 */
+.modalTable .form-group > .input-group > label.input-group-addon{font-size:12px; font-family:Microsoft YaHei，Simsun;}
+.input-group .form-control:not(:first-child):not(:last-child), .input-group-addon:not(:first-child):not(:last-child), .input-group-btn:not(:first-child):not(:last-child){font-size:12px; font-family:Microsoft YaHei，Simsun;}
+/* iframe右边内同超出滚动样式 */
+.right-wrap{ overflow-y:scroll;}
+/* 模态框中确定取消按钮样式 */
+.modal-footer .col-xs-10 button[type="button"]{background: #58a1f3; color:#fff;}
+
+/* 模态框禁止滚动样式 */
+.box-wrap{ overflow: hidden;}
+.modal-open .modal{ overflow:hidden;}
+.pace-done{ overflow:hidden;}
+
+/* iframe左边树形高度滚动 */
+.left-layout{ height:100%; overflow-y:auto;}
+.right-layout{height:100%; overflow-y:auto;}
+
+
+/*滚动条样式*/
+::-webkit-scrollbar-track {
+	background-color: #F5F5F5
+}
+
+::-webkit-scrollbar {
+	width: 6px;
+	height:6px;
+	background-color: #F5F5F5
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #999
+}
+
+
+/*下来框样式*/
+form .form-group .input-group > span{
+	width:100% !important;
+}
+
+.select2-container{
+	width: 186px;
+	padding: 0;
+	font-size:12px;
+}
+
+.form-group .input-group .select2-container .select2-choice .select2-arrow, .row .select2-container .select2-choice .select2-arrow{
+	background-image:initial;
+}
+
+.form-control .select2-choice {
+	height: 32px;
+	line-height: 32px;
+	border: none;
+	padding: 0;
+	padding: 0px 12px;
+}
+
+.select2-container .select2-choice {
+	background-image: initial;
+}
+
+/*字体大小*/
+body, label, input, button, select, textarea, .uneditable-input,
+	.navbar-search .search-query {
+	font-family: Helvetica, Georgia, Arial, sans-serif, 宋体;
+}
+
+/*表单中字段名称和字段样式*/
+.form-group > .input-group > label.input-group-addon  {
+    background-color: #fff;
+    border: none;
+    width: 80px;
+    padding: 5px;
+    text-align: right;
+    font-weight: inherit;
+}
+
+
+/*表单中label添加冒号*/
+.form-group > .input-group > label.input-group-addon:after{
+    content: ":";
+}
+
+/*页面中label添加冒号*/
+.form-group > span.input-sm:after{
+    content: ":";
+}
+
+/*表单布局调整*/
+.form-group > .input-group{
+	width:100%;
+	position:relative;
+}
+
+/*紧凑的form表单布局*/
+.compact-form .form-group{
+	margin-bottom: 0;
+    margin-top: 5px;
+}
+/*宽松的form表单布局*/
+.loose-form .form-group{
+	margin-bottom: 20;
+    margin-top: 10px;
+}
+/*宽松的form表单布局*/
+.loose-form .form-group .input-sm{
+	height: 40px;
+}
+
+/*form表单布局*/
+.form-group > .input-group .input-group-addon{
+	font-size:12px;
+}
+
+/*必填星号*/
+span.required {
+/*     position: absolute; */
+    top: 5px;
+    right: -10px;
+    color: #cc0000;
+    font-weight: bold
+}
+
+/*校验控件定位*/
+.has-error .help-block {
+    position: absolute;
+    display: inline-block;
+    border-radius: 0;
+    border: none;
+    max-width: 276px;
+    font-size: 12px;
+    background-color: rgb(241, 120, 5);
+    color: #000;
+    text-align: center;
+    padding: 5px;
+    margin: 0;
+    z-index: 9999;
+    filter: alpha(opacity=90); /* IE */
+    -moz-opacity: .9; /* 老版Mozilla */
+    -khtml-opacity: .9; /* 老版Safari */
+    opacity: .9; /* 支持opacity的浏览器*/
+}
+
+.has-error .tooltip-arrow {
+    display: block;
+    margin-left: -5px;
+    border-width: 5px 5px 0;
+    border-top-color: rgb(241, 120, 5);
+    z-index: 9999;
+    filter: alpha(opacity=90); /* IE */
+    -moz-opacity: .9; /* 老版Mozilla */
+    -khtml-opacity: .9; /* 老版Safari */
+    opacity: .9; /* 支持opacity的浏览器*/
+}
+
+.tooltip-arrow {
+    display: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+
+.input-group-addon {
+    padding: 5px;
+}
+
+.has-feedback label ~ .form-control-feedback {
+    top: 0;
+}
+
+.form-group .form-control-feedback {
+    right: -25px;
+}
+/* */
+/* 需要验证的下拉框样式 */
+.padding_none .form-control{
+	padding-right:0;
+}
+
+/* 没有左右结构的时候字体大小 */
+.col-xs-12 .btn{ font-size:12px;}
+
+/* 查询条件需要jbox插件时的样式 */
+.btn-default{ border-left:none;}
+.main_search .form-group { margin-right: 10px; position: relative;}
+.main_search .btn-default{ border-left:1px solid #ccc; position: absolute; border-radius: 0 4px 4px 0; right: -2px; top: 0;  height: 34px;}
+.main_search .input-group-addon, .input-group-btn{ width:auto;}
+/* .main_search .form-group  a > .icon-search{ display:block; padding-top:3px;} */
+
+
+.pagination-detail .btn-group>.btn:first-child{ background:#ddd;width:50px;}
+/*左侧按钮  */
+.btnwidth button{
+	width : 55px;
+	font-size: 12px;
+}
+
+
+/*用户、用户组按钮  */
+.buttonx{
+	border: 1px solid #ccc;
+	min-height: 30px;
+}

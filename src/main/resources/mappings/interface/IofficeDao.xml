@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ewide.platform.interfaces.dao.IofficeDao">
+	<resultMap type="net.ewide.platform.interfaces.dao.OfficeVo" id="list">
+		<result property="id" column="id" />
+		<result property="parentId" column="PARENT_ID" />
+		<result property="text" column="NAME" />
+	</resultMap>
+	<select id="findList"  parameterType="String" resultMap="list">
+		  SELECT t.id, t.PARENT_ID, t.NAME
+      		FROM sys_office t
+			START WITH t.id = #{0}
+			CONNECT BY PRIOR t.id = t.parent_id
+	</select>
+</mapper>
